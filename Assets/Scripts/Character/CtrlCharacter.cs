@@ -9,6 +9,14 @@ public class CtrlCharacter : BaseCharacter
     private float inputx;
     private float inputy;
     public Animator animatorCtl;
+    public float getinputx()
+    {
+        return inputx;
+    }
+    public float getinputy()
+    {
+        return inputy;
+    }
     private void Start()
     {
         rigidbody2d = this.GetComponent<Rigidbody2D>();
@@ -23,8 +31,8 @@ public class CtrlCharacter : BaseCharacter
     }
     public void MoveUpdate()
     {
-        rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + inputx * speed * Time.deltaTime,
-        rigidbody2d.transform.position.y + inputy * speed * Time.deltaTime));//刚体控制移动防止撞墙疯狂抖动
+        rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + inputx * speed * Time.fixedDeltaTime,
+        rigidbody2d.transform.position.y + inputy * speed * Time.fixedDeltaTime));//刚体控制移动防止撞墙疯狂抖动
         if (inputx < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -52,15 +60,25 @@ public class CtrlCharacter : BaseCharacter
             {
                 animatorCtl.SetTrigger("isAttack");
                 attackIsAlready = false;
-                Debug.Log(Time.time);
-                StartCoroutine(Timer());
+                Fire();
+                //Debug.Log(Time.time);
+                StartCoroutine(Timer(cd));
             }
         }
     }
 
-    IEnumerator Timer()
+    public void Fire()
     {
-        yield return new WaitForSeconds(0.5f);
+        GameObject fire = new GameObject();
+        Fireball fireball = fire.AddComponent<Fireball>();
+        fireball.Init(this);
+        //Destroy(fire, 0.5f);
+    }
+
+    IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
         attackIsAlready = true;
     }
+
 }
