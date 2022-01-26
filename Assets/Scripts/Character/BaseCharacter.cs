@@ -16,8 +16,8 @@ public class BaseCharacter : MonoBehaviour
         die
     }
     public float speed = 5;
-    public float cd = 0.5f;
-    public bool attackIsAlready = true;
+    public float cd = 1.0f;
+    private float lasttime = 0;
     public virtual void Init(string path)
     {
         GameObject skinres = Resources.Load<GameObject>(path);
@@ -25,6 +25,18 @@ public class BaseCharacter : MonoBehaviour
         skin.transform.parent = this.transform.parent;
         skin.transform.position = Vector3.zero;
         skin.transform.localEulerAngles = Vector3.zero;
+    }
+    public bool attackIsAlready()
+    {
+        if (Time.time - lasttime > 1.0f)
+        {
+            lasttime = Time.time;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void Start()

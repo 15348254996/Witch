@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,13 +56,10 @@ public class CtrlCharacter : BaseCharacter
         }
 
         {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
-            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready == true)
+            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true)
             {
                 animatorCtl.SetTrigger("isAttack");
-                attackIsAlready = false;
                 Fire();
-                //Debug.Log(Time.time);
-                StartCoroutine(Timer(cd));
             }
         }
     }
@@ -72,13 +69,7 @@ public class CtrlCharacter : BaseCharacter
         GameObject fire = new GameObject();
         Fireball fireball = fire.AddComponent<Fireball>();
         fireball.Init(this);
-        //Destroy(fire, 0.5f);
-    }
-
-    IEnumerator Timer(float time)
-    {
-        yield return new WaitForSeconds(time);
-        attackIsAlready = true;
+        Destroy(fire, 0.5f);
     }
 
 }

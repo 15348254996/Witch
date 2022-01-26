@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public float Speed = 6.0f;
+    public float Speed = 10.0f;
     private CtrlCharacter character;
     private GameObject skin;
     private float direct;//人物朝向 0时向右  180时向左
@@ -13,18 +13,9 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(direct);
 
-        if (direct - 0 < 0.001f)
-        {
-            rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + Speed * Time.fixedDeltaTime,
-            rigidbody2d.transform.position.y));
-            Debug.Log(rigidbody2d.transform.position.x);
-        }
-        if (direct - 180 < 0.001f)
-        {
-            rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x - Speed * Time.fixedDeltaTime,
-            rigidbody2d.transform.position.y));
-        }
+
     }
     public void Init(CtrlCharacter ctrlCharacter)//需要传入调用的角色
     {
@@ -38,10 +29,12 @@ public class Fireball : MonoBehaviour
         if (Math.Abs(direct - 0) < 0.001)
         {
             skin.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            rigidbody2d.velocity = new Vector2(Speed, 0);
         }
         if (Math.Abs(direct - 180) < 0.001)
         {
             skin.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            rigidbody2d.velocity = new Vector2(-Speed, 0);
         }
     }
 
