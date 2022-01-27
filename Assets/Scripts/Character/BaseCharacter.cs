@@ -1,13 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
     private GameObject skin;
-    public int HP;
+    public int HP = 100;
     public int SP;
-    public enum status//角色的状态
+    public enum statuses//角色的状态
     {
         normal,//正常状态
         frozen,//冻结状态
@@ -15,9 +15,12 @@ public class BaseCharacter : MonoBehaviour
         dizziness,//催眠状态
         die
     }
+    public statuses status = statuses.normal;
     public float speed = 5;
     public float cd = 1.0f;
     private float lasttime = 0;
+
+    protected Transform[] grandFa;
     public virtual void Init(string path)
     {
         GameObject skinres = Resources.Load<GameObject>(path);
@@ -28,7 +31,7 @@ public class BaseCharacter : MonoBehaviour
     }
     public bool attackIsAlready()
     {
-        if (Time.time - lasttime > 1.0f)
+        if (Time.time - lasttime > cd)
         {
             lasttime = Time.time;
             return true;

@@ -21,6 +21,8 @@ public class CtrlCharacter : BaseCharacter
     {
         rigidbody2d = this.GetComponent<Rigidbody2D>();
         animatorCtl = this.GetComponent<Animator>();
+        grandFa = GetComponentsInChildren<Transform>(true);
+        HP = 100;
     }
     private void FixedUpdate()
     {
@@ -28,11 +30,19 @@ public class CtrlCharacter : BaseCharacter
         AnimateUpdate();
         inputx = Input.GetAxis("Horizontal");
         inputy = Input.GetAxis("Vertical");
+        Isdie();
+        StatusCtl(status);
+        Debug.Log(HP);
+        Debug.Log(status);
     }
     public void MoveUpdate()
     {
-        rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + inputx * speed * Time.fixedDeltaTime,
-        rigidbody2d.transform.position.y + inputy * speed * Time.fixedDeltaTime));//刚体控制移动防止撞墙疯狂抖动
+        if (status != BaseCharacter.statuses.frozen && status != BaseCharacter.statuses.die)
+        {
+            rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + inputx * speed * Time.fixedDeltaTime,
+            rigidbody2d.transform.position.y + inputy * speed * Time.fixedDeltaTime));//刚体控制移动防止撞墙疯狂抖动
+
+        }
         if (inputx < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -70,6 +80,56 @@ public class CtrlCharacter : BaseCharacter
         Fireball fireball = fire.AddComponent<Fireball>();
         fireball.Init(this);
         Destroy(fire, 0.5f);
+    }
+    public void Takedamage(int damage)
+    {
+        HP = Mathf.Clamp(HP - damage, 0, 100);
+    }
+    private void Isdie()
+    {
+        if (HP == 0)
+        {
+            status = BaseCharacter.statuses.die;
+        }
+    }
+    private void StatusCtl(statuses status)
+    {
+        if (status == statuses.normal)
+        {
+            return;
+        }
+        else if (status == statuses.frozen)
+        {
+            foreach (Transform gameObject in grandFa)
+            {
+                if (gameObject.GetComponent<SpriteRenderer>() != null)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                }
+            }
+            Invoke("backtonormal", 1.0f);
+        }
+        else if (status == statuses.die)
+        {
+            foreach (Transform gameObject in grandFa)
+            {
+                if (gameObject.GetComponent<SpriteRenderer>() != null)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+                }
+            }
+        }
+    }
+    private void backtonormal()
+    {
+        status = statuses.normal;
+        foreach (Transform gameObject in grandFa)
+        {
+            if (gameObject.GetComponent<SpriteRenderer>() != null)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
     }
 
 }
