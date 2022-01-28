@@ -9,13 +9,17 @@ public class IceBird : BaseEnemy
     {
         base.Start();
         skin = Resources.Load<GameObject>("Prefab/Enemy/Bluebird");
-
+        Hp = 100;
     }
 
     // Update is called once per frame
     new void Update()
     {
         Fire();
+        IsDie();
+        StatusCtl(status);
+        Debug.Log(Hp);
+        Debug.Log(status);
     }
     new void Fire()
     {
@@ -26,5 +30,6 @@ public class IceBird : BaseEnemy
             iceball.Init(character, this.gameObject);
         }
     }
+
 
 }

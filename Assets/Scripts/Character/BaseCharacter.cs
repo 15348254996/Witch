@@ -6,6 +6,7 @@ public class BaseCharacter : MonoBehaviour
 {
     private GameObject skin;
     public int HP = 100;
+    public int MaxHP = 100;
     public int SP;
     public enum statuses//角色的状态
     {
@@ -15,7 +16,7 @@ public class BaseCharacter : MonoBehaviour
         dizziness,//催眠状态
         die
     }
-    public statuses status = statuses.normal;
+    public static statuses status = statuses.normal;
     public float speed = 5;
     public float cd = 1.0f;
     private float lasttime = 0;

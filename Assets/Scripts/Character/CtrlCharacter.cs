@@ -32,7 +32,7 @@ public class CtrlCharacter : BaseCharacter
         inputy = Input.GetAxis("Vertical");
         Isdie();
         StatusCtl(status);
-        Debug.Log(HP);
+        Debug.Log("char" + HP);
         Debug.Log(status);
     }
     public void MoveUpdate()
@@ -90,6 +90,11 @@ public class CtrlCharacter : BaseCharacter
         if (HP == 0)
         {
             status = BaseCharacter.statuses.die;
+            GameManager.StatusChange(GameManager.GameStatuses.Fault);
+        }
+        else if (status != statuses.frozen)
+        {
+            status = BaseCharacter.statuses.normal;
         }
     }
     private void StatusCtl(statuses status)
@@ -116,6 +121,7 @@ public class CtrlCharacter : BaseCharacter
                 if (gameObject.GetComponent<SpriteRenderer>() != null)
                 {
                     gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+                    GameManager.gamestatus = GameManager.GameStatuses.Fault;
                 }
             }
         }

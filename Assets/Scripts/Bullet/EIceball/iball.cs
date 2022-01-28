@@ -6,12 +6,12 @@ public class iball : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<CtrlCharacter>().status != BaseCharacter.statuses.die &&
-        other.GetComponent<CtrlCharacter>().status != BaseCharacter.statuses.frozen)
+        if (CtrlCharacter.status != BaseCharacter.statuses.die &&
+        CtrlCharacter.status != BaseCharacter.statuses.frozen)
         {
             Destroy(this.transform.parent.gameObject);
+            CtrlCharacter.status = BaseCharacter.statuses.frozen;
             other.GetComponent<CtrlCharacter>().Takedamage(25);
-            other.GetComponent<CtrlCharacter>().status = BaseCharacter.statuses.frozen;
         }
     }
 }
