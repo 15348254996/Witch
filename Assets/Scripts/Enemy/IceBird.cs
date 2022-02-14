@@ -18,8 +18,8 @@ public class IceBird : BaseEnemy
         Fire();
         IsDie();
         StatusCtl(status);
-        Debug.Log(Hp);
-        Debug.Log(status);
+        //Debug.Log(Hp);
+        //Debug.Log(status);
     }
     new void Fire()
     {

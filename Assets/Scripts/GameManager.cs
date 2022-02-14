@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Threading;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,5 +61,16 @@ public class GameManager : MonoBehaviour
                 canvas.transform.Find("Panel").gameObject.SetActive(false);
             }
         }
+    }
+
+    public void CountdowntoNormal(Collider2D other)
+    {
+        StartCoroutine(counttonormal(other));
+    }
+
+    public IEnumerator counttonormal(Collider2D other)
+    {
+        yield return new WaitForSeconds(1);
+        other.GetComponent<CtrlCharacter>().backtonormal();
     }
 }

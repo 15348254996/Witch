@@ -32,8 +32,8 @@ public class CtrlCharacter : BaseCharacter
         inputy = Input.GetAxis("Vertical");
         Isdie();
         StatusCtl(status);
-        Debug.Log("char" + HP);
-        Debug.Log(status);
+        //Debug.Log("char" + HP);
+        //Debug.Log(status);
     }
     public void MoveUpdate()
     {
@@ -66,7 +66,7 @@ public class CtrlCharacter : BaseCharacter
         }
 
         {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
-            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true)
+            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true && status != statuses.frozen)
             {
                 animatorCtl.SetTrigger("isAttack");
                 Fire();
@@ -112,7 +112,7 @@ public class CtrlCharacter : BaseCharacter
                     gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                 }
             }
-            Invoke("backtonormal", 1.0f);
+
         }
         else if (status == statuses.die)
         {
@@ -126,7 +126,8 @@ public class CtrlCharacter : BaseCharacter
             }
         }
     }
-    private void backtonormal()
+
+    public void backtonormal()
     {
         status = statuses.normal;
         foreach (Transform gameObject in grandFa)

@@ -13,7 +13,7 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(direct);
+        //Debug.Log(direct);
 
 
     }

@@ -18,7 +18,7 @@ public class BaseCharacter : MonoBehaviour
     }
     public static statuses status = statuses.normal;
     public float speed = 5;
-    public float cd = 1.0f;
+    private const float cd = 0.8f;
     private float lasttime = 0;
 
     protected Transform[] grandFa;
