@@ -10,11 +10,12 @@ public class BaseCharacter : MonoBehaviour
     public int SP;
     public enum statuses//角色的状态
     {
+        inAnime,//动画状态
         normal,//正常状态
         frozen,//冻结状态
         burn,//烧伤状态
         dizziness,//催眠状态
-        die
+        die//死亡状态
     }
     public static statuses status = statuses.normal;
     public float speed = 5;

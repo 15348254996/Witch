@@ -26,14 +26,16 @@ public class CtrlCharacter : BaseCharacter
     }
     private void FixedUpdate()
     {
-        MoveUpdate();
-        AnimateUpdate();
-        inputx = Input.GetAxis("Horizontal");
-        inputy = Input.GetAxis("Vertical");
+        Debug.Log(status);
+        if (status != statuses.inAnime)
+        {
+            inputx = Input.GetAxis("Horizontal");
+            inputy = Input.GetAxis("Vertical");
+            MoveUpdate();
+            AnimateUpdate();
+        }
         Isdie();
         StatusCtl(status);
-        //Debug.Log("char" + HP);
-        //Debug.Log(status);
     }
     public void MoveUpdate()
     {
@@ -41,7 +43,6 @@ public class CtrlCharacter : BaseCharacter
         {
             rigidbody2d.MovePosition(new Vector2(rigidbody2d.transform.position.x + inputx * speed * Time.fixedDeltaTime,
             rigidbody2d.transform.position.y + inputy * speed * Time.fixedDeltaTime));//刚体控制移动防止撞墙疯狂抖动
-
         }
         if (inputx < 0)
         {
@@ -65,13 +66,13 @@ public class CtrlCharacter : BaseCharacter
             }
         }
 
-        {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
-            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true && status != statuses.frozen)
-            {
-                animatorCtl.SetTrigger("isAttack");
-                Fire();
-            }
-        }
+        // {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
+        //     if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true && status != statuses.frozen)
+        //     {
+        //         animatorCtl.SetTrigger("isAttack");
+        //         Fire();
+        //     }
+        // }
     }
 
     public void Fire()
@@ -92,7 +93,7 @@ public class CtrlCharacter : BaseCharacter
             status = BaseCharacter.statuses.die;
             GameManager.StatusChange(GameManager.GameStatuses.Fault);
         }
-        else if (status != statuses.frozen)
+        else if (status != statuses.frozen && status != statuses.inAnime)
         {
             status = BaseCharacter.statuses.normal;
         }

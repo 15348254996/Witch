@@ -17,13 +17,16 @@ public class GameManager : MonoBehaviour
 
     public enum GameStatuses
     {
-        Begin,
-        Main,
+        Start,             //起始程序
+        Begin,             //选择是否开始游戏
+        Op,                //Op动画
+        Guidance,
+        Main,              //主游戏
         Suspend,
         Success,
-        Fault
+        Fault              //游戏失败
     }
-    public static GameStatuses gamestatus = GameStatuses.Begin;
+    public static GameStatuses gamestatus = GameStatuses.Start;
     private void Start()
     {
         gamestatus = GameStatuses.Begin;
