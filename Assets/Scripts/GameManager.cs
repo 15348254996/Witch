@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
         Start,             //起始程序
         Begin,             //选择是否开始游戏
         Op,                //Op动画
-        Guidance,
+        Guidance,          //指导场景
+        TheFirstManager,   //第一次见面
         Main,              //主游戏
         Suspend,
         Success,

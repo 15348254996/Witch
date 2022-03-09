@@ -9,6 +9,7 @@ public class OpManager : MonoBehaviour
 
     private GameObject OpenText;
     private Animator Opanime;
+    
     void Start()
     {
         OpenText = GameObject.Find("OpText");

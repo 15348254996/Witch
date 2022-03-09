@@ -9,6 +9,7 @@ public class CtrlCharacter : BaseCharacter
     private float inputx;
     private float inputy;
     public Animator animatorCtl;
+    public bool islearnMagic;
     public float getinputx()
     {
         return inputx;
@@ -22,6 +23,7 @@ public class CtrlCharacter : BaseCharacter
         rigidbody2d = this.GetComponent<Rigidbody2D>();
         animatorCtl = this.GetComponent<Animator>();
         grandFa = GetComponentsInChildren<Transform>(true);
+        islearnMagic = false;
         HP = 100;
     }
     private void FixedUpdate()
@@ -66,13 +68,14 @@ public class CtrlCharacter : BaseCharacter
             }
         }
 
-        // {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
-        //     if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true && status != statuses.frozen)
-        //     {
-        //         animatorCtl.SetTrigger("isAttack");
-        //         Fire();
-        //     }
-        // }
+        {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
+            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true &&
+                    status == statuses.normal && islearnMagic == true)
+            {
+                animatorCtl.SetTrigger("isAttack");
+                Fire();
+            }
+        }
     }
 
     public void Fire()
