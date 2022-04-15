@@ -18,6 +18,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Guidance.unity
     guid: a17b617343520ee4185917260b150cca
   - enabled: 1
-    path: Assets/Scenes/Finish.unity
-    guid: d9f4bde33e72bef42a3bdf5b84d5cd40
+    path: Assets/Scenes/TheFirstMeeting.unity
+    guid: 714d3a57d0bc45742bc0fb04fa08b2a8
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Choice.unity
+    guid: 7f9efae41426521449c1c317c3b19dd3
+  - enabled: 1
+    path: Assets/Scenes/Go.unity
+    guid: 089acf8172f552149b5ca9df2422c1e8
+  - enabled: 1
+    path: Assets/Scenes/GoResult.unity
+    guid: 731b0ce4e8544974491869cd28bc08e0
+  - enabled: 1
+    path: Assets/Scenes/NotGo.unity
+    guid: f11be0d061af429448fa326f21dddf12
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: 7ef50832ddcd9a84b8fe684b5034699d
   m_configObjects: {}

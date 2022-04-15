@@ -9,7 +9,7 @@ public class CtrlCharacter : BaseCharacter
     private float inputx;
     private float inputy;
     public Animator animatorCtl;
-    public bool islearnMagic;
+    public static bool islearnMagic;
     public float getinputx()
     {
         return inputx;
@@ -28,7 +28,8 @@ public class CtrlCharacter : BaseCharacter
     }
     private void FixedUpdate()
     {
-        Debug.Log(status);
+        //Debug.Log(status);
+        Debug.Log(islearnMagic);
         if (status != statuses.inAnime)
         {
             inputx = Input.GetAxis("Horizontal");
@@ -69,11 +70,12 @@ public class CtrlCharacter : BaseCharacter
         }
 
         {//控制攻击动作，此处只判断了按键和cd，还应该判断人物状态
-            if (Input.GetKeyDown(KeyCode.J) && attackIsAlready() == true &&
+            if (Input.GetKey(KeyCode.J) && attackIsAlready() == true &&
                     status == statuses.normal && islearnMagic == true)
             {
                 animatorCtl.SetTrigger("isAttack");
                 Fire();
+                Debug.Log("getkey");
             }
         }
     }
@@ -125,7 +127,8 @@ public class CtrlCharacter : BaseCharacter
                 if (gameObject.GetComponent<SpriteRenderer>() != null)
                 {
                     gameObject.GetComponent<SpriteRenderer>().color = Color.black;
-                    GameManager.gamestatus = GameManager.GameStatuses.Fault;
+                    GameManager.gamestatus = GameManager.GameStatuses.Final;
+                    GameManager.SceneChange("Final");
                 }
             }
         }

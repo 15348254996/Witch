@@ -6,6 +6,7 @@ TagManager:
   tags:
   - New tag
   - Grid
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - CBullet
   - Enemy
   - EBullet
-  - 
-  - 
+  - Properties
+  - rubbish
   - 
   - 
   - 

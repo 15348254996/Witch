@@ -7,7 +7,7 @@ public class DialogSystem : MonoBehaviour
 {
     [Header("对话系统组件")]
     public Text DialogText;//对话框
-    private TextAsset DialogResources;//对话资源
+    public TextAsset DialogResources;//对话资源
     public TextAsset GetDialogResources()
     {
         return DialogResources;
@@ -25,7 +25,7 @@ public class DialogSystem : MonoBehaviour
     }
     private static int index = 0;
 
-    private void Start()
+    private void Awake()
     {
         Panel = this.transform.Find("Panel").gameObject;
         DialogText = Panel.transform.Find("DialogText").Find("Text").GetComponent<Text>();
@@ -36,17 +36,18 @@ public class DialogSystem : MonoBehaviour
     public void loadText(TextAsset textresources)
     {
         DialogResources = textresources;
-        Peolpename.text = "";
         DialogText.text = "";
+        Peolpename.text = "";
         Textlist.Clear();
         isget = false;
+        Debug.Log("有用");
         GetListfromFile();
         index = 0;
         isover = false;
     }
     public void showtext()
     {
-
+        //Debug.Log(Textlist.Count);
         if (Input.GetKeyDown(KeyCode.Space) && index == Textlist.Count)
         {
             index = 0;
@@ -70,6 +71,10 @@ public class DialogSystem : MonoBehaviour
                     Peolpename.text = Textlist[index];
                     index++;
                     break;
+                case "影子":
+                    Peolpename.text = Textlist[index];
+                    index++;
+                    break;
             }
             DialogText.text = Textlist[index];
             index++;
@@ -77,8 +82,10 @@ public class DialogSystem : MonoBehaviour
     }
     void GetListfromFile()
     {
+        Debug.Log(isget);
         if (isget == false)
         {
+            Debug.Log(DialogResources.name);
             if (DialogResources != null)
             {
                 var alltext = DialogResources.text.Split('\n');

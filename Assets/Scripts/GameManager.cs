@@ -21,8 +21,13 @@ public class GameManager : MonoBehaviour
         Begin,             //选择是否开始游戏
         Op,                //Op动画
         Guidance,          //指导场景
-        TheFirstManager,   //第一次见面
+        TheFirstManager,   //第一次见面 
         Main,              //主游戏
+        Choice,
+        Go,
+        GoResult,
+        NotGo,
+        Final,
         Suspend,
         Success,
         Fault              //游戏失败
@@ -45,7 +50,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(gamestatus);
         isend();
-        StatusCtl();
     }
     public void isend()
     {
@@ -53,17 +57,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject canvas = GameObject.Find("Canvas");
             canvas.transform.Find("Panel").gameObject.SetActive(true);
-        }
-    }
-    public void StatusCtl()
-    {
-        if (gamestatus == GameStatuses.Main)
-        {
-            GameObject canvas = GameObject.Find("Canvas");
-            if (canvas.transform.Find("Panel") != null)
-            {
-                canvas.transform.Find("Panel").gameObject.SetActive(false);
-            }
         }
     }
 

@@ -14,9 +14,9 @@ public class iball : MonoBehaviour
         if (CtrlCharacter.status != BaseCharacter.statuses.die &&
         CtrlCharacter.status != BaseCharacter.statuses.frozen)
         {
-            CtrlCharacter.status = BaseCharacter.statuses.frozen;
+            //ssCtrlCharacter.status = BaseCharacter.statuses.frozen;
             other.GetComponent<CtrlCharacter>().Takedamage(25);
-            gameManager.CountdowntoNormal(other);
+            //gameManager.CountdowntoNormal(other);
             Destroy(this.transform.parent.gameObject);
         }
     }

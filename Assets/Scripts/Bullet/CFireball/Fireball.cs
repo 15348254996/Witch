@@ -13,9 +13,6 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(direct);
-
-
     }
     public void Init(CtrlCharacter ctrlCharacter)//需要传入调用的角色
     {
@@ -24,7 +21,7 @@ public class Fireball : MonoBehaviour
         GameObject skinRes = ResManager.LoadPrefab("Prefab/Bullet/Fireball");
         skin = (GameObject)Instantiate(skinRes);
         rigidbody2d = skin.GetComponent<Rigidbody2D>();
-        //skin.transform.localPosition = GameObject.Find("FirePoint").transform.position;
+        skin.transform.localPosition = GameObject.Find("FirePoint").transform.position;
         skin.transform.parent = this.transform;
         if (Math.Abs(direct - 0) < 0.001)
         {
